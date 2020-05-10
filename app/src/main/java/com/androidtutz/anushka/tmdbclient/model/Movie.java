@@ -7,12 +7,11 @@ package com.androidtutz.anushka.tmdbclient.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-import android.databinding.BindingAdapter;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.databinding.BindingAdapter;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
 import android.widget.ImageView;
 
 import com.androidtutz.anushka.tmdbclient.BR;

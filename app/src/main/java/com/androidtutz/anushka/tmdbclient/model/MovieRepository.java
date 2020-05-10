@@ -1,7 +1,7 @@
 package com.androidtutz.anushka.tmdbclient.model;
 
 import android.app.Application;
-import android.arch.lifecycle.MutableLiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.androidtutz.anushka.tmdbclient.R;
 import com.androidtutz.anushka.tmdbclient.service.MovieDataService;
