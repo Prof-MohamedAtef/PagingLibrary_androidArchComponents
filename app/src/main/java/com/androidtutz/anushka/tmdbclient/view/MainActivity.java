@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.res.Configuration;
 import androidx.databinding.DataBindingUtil;
 import androidx.annotation.Nullable;
+import androidx.paging.PagedList;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +24,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<Movie> movies;
+    private PagedList<Movie> movies;
     private RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -58,10 +59,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void getPopularMovies() {
 
-        mainActivityViewModel.getAllMovies().observe(this, new Observer<List<Movie>>() {
+//        mainActivityViewModel.getAllMovies().observe(this, new Observer<List<Movie>>() {
+//            @Override
+//            public void onChanged(@Nullable List<Movie> moviesFromLiveData) {
+//                movies = (ArrayList<Movie>) moviesFromLiveData;
+//                showOnRecyclerView();
+//            }
+//        });
+        mainActivityViewModel.getMoviesPagedList().observe(this, new Observer<PagedList<Movie>>() {
             @Override
-            public void onChanged(@Nullable List<Movie> moviesFromLiveData) {
-                movies = (ArrayList<Movie>) moviesFromLiveData;
+            public void onChanged(PagedList<Movie> moviesFromLiveData) {
+                movies=moviesFromLiveData;
                 showOnRecyclerView();
             }
         });
@@ -72,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
     private void showOnRecyclerView() {
 
         recyclerView = activityMainBinding.rvMovies;
-        movieAdapter = new MovieAdapter(this, movies);
+        movieAdapter = new MovieAdapter(this);
+        movieAdapter.submitList(movies);
 
         if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
 
